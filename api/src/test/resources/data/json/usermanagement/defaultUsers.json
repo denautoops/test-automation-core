@@ -1,0 +1,37 @@
+[
+  {
+    "firstName": "Automation",
+    "lastName": "Test1",
+    "password": "Testing1!",
+    "role": "CITIZEN",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Automation",
+    "lastName": "Test2",
+    "password": "Testing1!",
+    "role": "RESIDENT",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Automation",
+    "lastName": "Test3",
+    "password": "Testing1!",
+    "role": "TOURIST",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Automation",
+    "lastName": "Test4",
+    "password": "Testing1!",
+    "role": "SOLE_TRADER",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Automation",
+    "lastName": "Test5",
+    "password": "Testing1!",
+    "role": "NGO",
+    "status": "ACTIVE"
+  }
+]

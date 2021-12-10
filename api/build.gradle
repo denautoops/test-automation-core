@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id "io.qameta.allure" version "2.8.1"
+}
+
+group 'com.automation.api'
+version '1.0-SNAPSHOT'
+
+allure {
+    autoconfigure = true
+    version = '2.8.1'
+}
+
+dependencies {
+    compile project(':core')
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
+
+test {
+
+    doFirst {
+        environment 'thread.count', findProperty('thread.count')
+        environment 'dataSecret', findProperty('dataSecret')
+        environment 'passwordSecret', findProperty('passwordSecret')
+        environment 'passwordIteration', findProperty('passwordIteration')
+        environment 'passwordKeyLength', findProperty('passwordKeyLength')
+        environment 'db.server', findProperty('db.server')
+        environment 'db.user', findProperty('db.user')
+        environment 'db.password', findProperty('db.password')
+        environment 'api.baseUrl', findProperty('api.baseUrl')
+
+    }
+
+    def threadCount = findProperty('thread.count')
+
+    systemProperties = [
+            'junit.jupiter.execution.parallel.enabled'                 : 'true',
+            'junit.jupiter.execution.parallel.config.strategy'         : 'fixed',
+            'junit.jupiter.execution.parallel.config.fixed.parallelism': threadCount,
+            'junit.jupiter.execution.parallel.mode.default'            : 'concurrent'
+    ]
+
+
+    useJUnitPlatform {
+        //includeTags 'usermanagement'
+        includeEngines 'junit-jupiter'
+    }
+
+    testLogging {
+        outputs.upToDateWhen { false }
+        showStandardStreams = true
+        events "PASSED", "STARTED", "FAILED", "SKIPPED"
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+group 'com.automation.core'
+version '1.0-SNAPSHOT'
+
+subprojects {
+
+    repositories {
+        mavenCentral()
+    }
+
+    defaultTasks 'check', 'test', 'install'
+
+    configurations {
+        agent
+    }
+}
